@@ -28,17 +28,19 @@ var EventHandlers = {
       }
     } else if (options.message === 'dots' || options.message === 'children') {
       // Click on dots
-      targetSlide = options.index * options.slidesToScroll;
+      const difference = options.index - options.currentSlide;
+      const limit = Math.floor(slideCount/2.0);
+      if(difference > limit) { // left
+        targetSlide = options.index - slideCount;
+      } else if(difference < -limit) {
+        targetSlide = options.index + slideCount;
+      } else {
+        targetSlide = options.index;
+      }
+      console.log('calc', difference, limit, targetSlide)
+      if(targetSlide - options.currentSlide)
       if (targetSlide === options.currentSlide) {
         return;
-      }
-        console.log("slide", this.props.infinite, targetSlide, slideCount, options);
-       if (this.props.infinite) {
-        if (targetSlide === 0 && options.currentSlide === slideCount - 1) {
-          return this.slideHandler(options.currentSlide + 1);
-        } else if (targetSlide === slideCount - 1 && options.currentSlide === 0) {
-          return this.slideHandler(-1);
-        }
       }
     } else if (options.message === 'index') {
       targetSlide = parseInt(options.index);
