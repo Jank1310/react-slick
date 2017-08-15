@@ -32,7 +32,7 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
-      
+        console.log("slide", this.props.infinite, targetSlide, slideCount, options);
        if (this.props.infinite) {
         if (targetSlide === 0 && options.currentSlide === slideCount - 1) {
           return this.slideHandler(options.currentSlide + 1);
